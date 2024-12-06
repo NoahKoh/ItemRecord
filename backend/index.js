@@ -26,6 +26,21 @@ app.get("/items", (req, res)=> { {/* /items is the endpoint for express server. 
     })
 })
 
+app.post("/items", (req, res)=>{
+    const q = "INSERT INTO items (`name`, `desc`, `info`, `extrainfo`) VALUES (?)"
+    const values = [
+        req.body.name,
+        req.body.desc,
+        req.body.info,
+        req.body.extrainfo
+    ]
+
+    db.query(q, [values], (err, data)=>{
+        if (err) {return res.json(err)}
+        return res.json("Item added successfully")
+    })
+})
+
 app.listen(8800, ()=> {
     console.log("Connected to backend!")
 })
