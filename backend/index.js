@@ -41,6 +41,16 @@ app.post("/items", (req, res)=>{
     })
 })
 
+app.delete("/items/:id", (req, res)=>{
+    const itemID = req.params.id
+    const q = "DELETE FROM items WHERE id = ?"
+
+    db.query(q, [itemID], (err, data)=>{
+        if (err) {return res.json(err)}
+        return res.json("Item deleted successfully")
+    })
+})
+
 app.listen(8800, ()=> {
     console.log("Connected to backend!")
 })

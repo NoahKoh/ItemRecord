@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
-import axios from "axios" // Use to fetch data from the backend servers
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"
+import axios from "axios" // Use to post data to the backend servers
 
 
 const Add = () => {

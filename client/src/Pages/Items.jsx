@@ -17,6 +17,15 @@ const Items = () => {
         fetchData()
     }, [])
 
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete("http://localhost:8800/items/" + id)
+            window.location.reload()
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     return (
         <div>
             <h1>Item Record</h1>
@@ -27,6 +36,7 @@ const Items = () => {
                         <p>{item.desc}</p>
                         <span>{item.info}</span>
                         <span>{item.extrainfo}</span>
+                        <button className="delete" onClick={() => handleDelete(item.id)}>Delete</button>
                     </div>
                 ))}
             </div>
