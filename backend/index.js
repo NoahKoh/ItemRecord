@@ -12,7 +12,7 @@ const db = mysql.createConnection({ // Connect to the database
 })
 
 app.use(express.json()) // Middleware to parse JSON
-app.use(cors()) // Muddleware for Cross-Origin Resource Sharing. In order to interact with backend.
+app.use(cors()) // Middleware for Cross-Origin Resource Sharing. In order to interact with backend.
 
 app.get("/", (req, res)=> {
     res.send("test")
@@ -50,6 +50,23 @@ app.delete("/items/:id", (req, res)=>{
         return res.json("Item deleted successfully")
     })
 })
+
+app.put("/items/:id", (req, res)=>{
+    const itemID = req.params.id
+    const q = "UPDATE items SET `name` = ?, `desc` = ?, `info` = ?, `extrainfo` = ? WHERE `id` = ?"
+    const values=[
+        req.body.name,
+        req.body.desc,
+        req.body.info,
+        req.body.extrainfo
+    ]
+
+    db.query(q, [...values, itemID], (err, data)=>{
+        if (err) {return res.json(err)}
+        return res.json("Item updated successfully")
+    })
+})
+
 
 app.listen(8800, ()=> {
     console.log("Connected to backend!")

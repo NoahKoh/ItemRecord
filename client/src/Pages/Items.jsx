@@ -37,6 +37,7 @@ const Items = () => {
                         <span>{item.info}</span>
                         <span>{item.extrainfo}</span>
                         <button className="delete" onClick={() => handleDelete(item.id)}>Delete</button>
+                        <button className="update"><Link to={`/update/${item.id}`}>Update</Link></button>
                     </div>
                 ))}
             </div>
